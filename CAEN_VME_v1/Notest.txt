@@ -1,0 +1,89 @@
+Полезные ссылки:
+
+https://stackoverflow.com/questions/4445418/how-to-add-additional-libraries-to-visual-studio-project
+
+Документация по дискриминатору (v814):
+C:\Andrey\CAEN_VME\v814_rev5
+
+Адрес дискриминатора:
+base = EE000000
+
+Чтобы считать фикисрованный код:
+base + FA = EE00000FA
+Фиксированный код
+0xfaf5
+
+Чтобы сделать это из браузера
+http://v4718-usb-21436.local/main/home
+Address mode: A32
+Data width: D16
+Address (Hex): EE0000FA
+
+-----------------------------------------------------
+Адрес VX1742 (АЦП):
+base = 32100000
+
+Документация по АЦП:
+C:\Andrey\CAEN_VME\manuals_VX1742\UM4279_V1742_UserManual_rev10
+C:\Andrey\CAEN_VME\manuals_VX1742\UM5698_742_Registers_Description_rev3
+
+Для проверки можно прочитать, например, Acquisition Status (0x8104):
+base + 0x8104 = 32108104
+
+Event Readout Buffer
+Address mode: A32
+Data width: D32
+Address: 0x32100000 - 0x32100FFC
+
+
+Ссылка на gitlab с библиотекой
+https://git.inp.nsk.su/lsrp/vmelib
+
+void pointers
+https://www.geeksforgeeks.org/void-pointer-c-cpp/
+
+memset
+https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/reference/memset-wmemset?view=msvc-170
+
+assert
+https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/reference/assert-macro-assert-wassert?view=msvc-170
+
+Задачи:
+- Посмотреть версию firmware для всех модулей
+- Изучить WaveDump и код для DESY TAC
+
+WaveDump:
+C:\Program Files\CAEN\Digitizers\WaveDump\
+
+DESY PC Soft
+C:\Andrey\DESY_TAC\DESY_PC_Soft\DESY_TAC_Soft
+
+Документация здесь
+
+------------------------------------------------------------------------------------
+
+Current Firmaware release V1742:
+ROC FPGA Release is 04.21 - Build 3B12
+AMC FPGA Release is 01.03 - Build 4410
+
+Firmaware update for VME
+http://v4718-usb-21436.local/main/firmwareupdate
+
+Файлик с версией 3.05 лежит здесь
+C:\Andrey\CAEN_VME\V3718_V4718_3.05
+
+Добавляем библиотеки в проект
+https://stackoverflow.com/questions/4445418/how-to-add-additional-libraries-to-visual-studio-project
+
+13 июля 2023
+
+Управление дискриминатором происходит непосредственно через CAENVMELib.
+Важный нюанс: после вызова SetPatternInhibit() необходимо вызвать команду чтения, например, фиксированного кода с дискриминатора,
+иначе контроллер умрёт. Эта команда не сработает и вернёт ошибку, но все дальнейшие адреса сработают правильно.
+
+Управление диджитайзером поанируется реализовать через библиотеку CAENDigitizer.
+
+
+
+
+
